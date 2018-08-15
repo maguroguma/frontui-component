@@ -1,0 +1,31 @@
+/* リスト全体のマージン、パディングは基本的になくす */
+ul {
+    margin: 0;
+    margin-left: 0.5em;
+    padding: 0 0 0 0;
+}
+
+/* リストのマーカーはnoneにする */
+li {
+    margin-left: 0.5em;
+    list-style-position: outside;
+    list-style-type: none;
+    font-size: 13pt;
+}
+
+/* collapseクラスのリスト項目の、子要素であるul要素は表示する */
+li.collapse > ul {
+    display: none;
+}
+
+/* expandクラスのリスト項目の、子要素であるul要素は表示する */
+li.expand > ul {
+    display: block;
+}
+
+img.marker {
+    width: 9pt;
+    height: 9pt;
+    margin-right: 3pt;
+    cursor: pointer;
+}
