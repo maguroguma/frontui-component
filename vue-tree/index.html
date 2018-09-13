@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js App</title>
+    <link href="main.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <p>{{ message }}</p>
+
+        <div>v-for DEMO</div>
+        <ol>
+            <li v-for="item in objList" :key="item.id">
+                ID.{{ item.id }} {{ item.name }} HP.{{ item.hp }}
+            </li>
+        </ol>
+
+        <div>button DEMO</div>
+        <div><button v-on:click="handleClick">TEST BUTTON</button></div>
+        <div>{{ state.count }} times clicked!</div>
+        <button v-on:click="increment">COUNT UP</button>
+
+        <div>{{ inputMessage }}</div>
+        <input v-model="inputMessage">
+        <div>{{ inputNumber }}</div>
+        <input v-model.number="inputNumber">
+
+        <div>v-if, v-show DEMO</div>
+        <div v-if="isShow">hidden?</div>
+        <div v-show="isShow">hidden?</div>
+        <template v-if="ok">
+            <header>タイトル</header>
+            <div>コンテンツ</div>
+        </template>
+        <div v-if="type==='A'">typeはA</div>
+        <div v-else-if="type==='B'">typeはB</div>
+        <div v-else>すべての条件を満たさなかった</div>
+
+        <div>v-bind DEMO</div>
+        <input type="text" v-bind:value="message">
+        <input type="text" :value="message">
+
+        <div>class/style binding DEMO</div>
+        <!--
+        <div :class="{ child: isChild, 'is-active': isActive }">Text</div>
+        <div :style="{ color: textColor, backgroundColor: bgColor }">Text</div>
+        -->
+        <div :class="classObject">Text</div>
+        <div :style="styleObject">Text</div>
+
+        <div>multi attribute binding DEMO</div>
+        <img v-bind="item">
+
+        <!-- DEBUG -->
+        <div>$data DEMO</div>
+        <div>{{ $data }}</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
