@@ -64,7 +64,6 @@ Vue.component('tree', {
             bus.$emit('node-select-event', selectedNode)
             console.log('EMITTED')
             console.log('CLICKED NODE: ' + selectedNode.id)
-            console.log(selectedNode.id)
         }
     }
 })
@@ -94,6 +93,13 @@ var app = new Vue({
             console.log('RECEIVED')
             console.log('CLICKED NODE: ' + selectedNode.id)
             this.count++
+            app.preSelectedNode = app.selectedNode
+            app.selectedNode = selectedNode
         })
+    },
+    filters: {
+        nodeStringer: function(node) {
+            return node ? node.id : 'NOT SELECTED'
+        }
     }
 })

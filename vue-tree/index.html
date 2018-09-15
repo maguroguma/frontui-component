@@ -22,8 +22,8 @@
 <div id="app">
     <button @click="addNewNode">選択中のノードに子ノードを追加</button>
     <button @click="deleteNode">選択中のノードを削除</button>
-    <div>直前の選択ノード: {{ preSelectedNode }}</div>
-    <div>現在の選択ノード: {{ selectedNode }}</div>
+    <div>直前の選択ノード: {{ preSelectedNode | nodeStringer }}</div>
+    <div>現在の選択ノード: {{ selectedNode | nodeStringer }}</div>
 
     <!-- the demo root element -->
     <ul class="root-node">
