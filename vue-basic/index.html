@@ -63,6 +63,11 @@
         <div>v-cloak DEMO</div>
         <div v-cloak>{{ objList }}</div>
 
+        <div>vue component DEMO</div>
+        <ul>
+            <comp-child v-for="item in objList" :key="item.id" :name="item.name" :hp="item.hp"></comp-child>
+        </ul>
+
         <!-- DEBUG -->
         <hr>
         <div>$data DEMO</div>

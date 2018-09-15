@@ -1,5 +1,12 @@
 var state = { count: 0 }
 
+// コンポーネントの定義はVueインスタンス化の前に行っておく必要がある
+Vue.component('comp-child', {
+    template: '<li>{{ name }} HP.{{ hp }}</li>',
+    // props: 親から受け取る
+    props: ['name', 'hp']
+})
+
 var app = new Vue({
     el: '#app',
 
@@ -58,10 +65,6 @@ var app = new Vue({
         console.log(this.$el)           // ルート要素
         console.log(this.$refs.hello)   // ルート以外のDOM要素
     }
-})
-
-Vue.component('comp-child', {
-    template: '<li>{{'
 })
 
 console.log(app.message)

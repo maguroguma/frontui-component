@@ -29,3 +29,7 @@ img.marker {
     margin-right: 3pt;
     cursor: pointer;
 }
+
+.root-node span {
+    cursor: pointer;
+}

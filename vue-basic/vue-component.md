@@ -82,3 +82,55 @@ Vue.component('my-component', {
 
 props down: 親から子への単方向通信
 
+propsで受け取ったデータは、`this` を介して自分のデータと同じように使用できるものの、読み込み専用。
+編集しようとするとエラーとなるため注意が必要。
+
+## propsの受け取りデータ型を指定する
+
+propsには受け取り型を指定しておくことが推奨されている。
+指定した型以外を受け取った場合、警告が表示されるようになる。
+
+また、デフォルト値や必須項目を定義でき、条件を満たされなければ警告を出すようにすることもできる。
+
+```javascript
+Vue.component('example', {
+    props: {
+        // 基本的な型チェック（nullはどんな型でも受け付ける）
+        propA: Number,
+        // 複数の受け入れ可能な型
+        propB: [String, Number],
+        // 必須な文字列
+        propC: {
+            type: String,
+            required: true
+        },
+        // デフォルト値
+        propD: {
+            type: Number,
+            default: 100
+        },
+        // オブジェクトと配列のデフォルトはファクトリ関数から返すようにしている
+        propE: {
+            type: Object,
+            default: function() {
+                return { message: 'hello' }
+            }
+        },
+        // カスタムバリデータ関数
+        propF: {
+            validator: function(value) {
+                return value > 10
+            }
+        }
+    }
+})
+```
+
+## 子から親
+
+**カスタムイベント** と **`$emit`** を使用する。
+
+event up: 子から親へのデータフロー
+
+子のイベントを親にキャッチさせる。
+`<comp-child @:childs-event="parentsMethod"></comp-child>`
