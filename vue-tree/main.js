@@ -26,6 +26,13 @@ var treeNode = {
             ]
         }
 
+// event bus
+var bus = new Vue({
+    data: {
+        count: 0
+    }
+})
+
 // define component
 Vue.component('tree', {
     template: '#tree-template',
@@ -33,7 +40,8 @@ Vue.component('tree', {
         node: Object
     },
     data: function() {
-        return { open: false }
+        return {
+        }
     },
     methods: {
         openAndClose: function(event) {
@@ -52,8 +60,11 @@ Vue.component('tree', {
                 fileName == "close.png" ? target.src = "./images/open.png" : target.src = "./images/close.png"
             }
         },
-        selectNode: function(event) {
-            console.log(event)
+        selectNode: function(event, selectedNode) {
+            bus.$emit('node-select-event', selectedNode)
+            console.log('EMITTED')
+            console.log('CLICKED NODE: ' + selectedNode.id)
+            console.log(selectedNode.id)
         }
     }
 })
@@ -62,6 +73,27 @@ Vue.component('tree', {
 var app = new Vue({
     el: '#app',
     data: {
-        treeNode: treeNode
+        treeNode: treeNode,
+        preSelectedNode: null,
+        selectedNode: null
+    },
+    methods: {
+        updateState(event) {
+            console.log('RECEIVED')
+            console.log(event)
+        },
+        addNewNode: function(event) {
+            console.log(event)
+        },
+        deleteNode: function(event) {
+            console.log(event)
+        }
+    },
+    created: function() {
+        bus.$on('node-select-event', function(selectedNode) {
+            console.log('RECEIVED')
+            console.log('CLICKED NODE: ' + selectedNode.id)
+            this.count++
+        })
     }
 })

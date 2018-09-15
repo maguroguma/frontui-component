@@ -6,27 +6,33 @@
     <link href="main.css" rel="stylesheet">
 </head>
 <body>
+
 <!-- this template is not recognized as DOM -->
 <script type="text/x-template" id="tree-template">
     <li class="collapse expand">
         <img src="./images/open.png" @click="openAndClose" class="marker">
-        <span>{{ node.id }}</span>
+        <span @click="selectNode($event, node)">{{ node.id }}</span>
         <ul>
-            <tree v-for="(node, index) in node.children" :key="index" :node="node"></tree>
+            <tree v-for="(node, index) in node.children"
+            :key="index" :node="node"></tree>
         </ul>
     </li>
 </script>
+
 <div id="app">
-    <button>選択中のノードに子ノードを追加</button>
-    <button>選択中のノードを削除</button>
+    <button @click="addNewNode">選択中のノードに子ノードを追加</button>
+    <button @click="deleteNode">選択中のノードを削除</button>
+    <div>直前の選択ノード: {{ preSelectedNode }}</div>
+    <div>現在の選択ノード: {{ selectedNode }}</div>
 
     <!-- the demo root element -->
     <ul class="root-node">
         <tree :node="treeNode"></tree>
     </ul>
+</div>
 
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
-    <script src="main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+<script src="main.js"></script>
+
 </body>
 </html>
