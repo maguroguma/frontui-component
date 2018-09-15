@@ -1,41 +1,65 @@
-var state = { count: 0 }
+// initial tree object
+var treeNode = {
+            id: 0,
+            children: [
+                {
+                    id: 1,
+                    children: [
+                        {
+                            id: 4,
+                            children: []
+                        },
+                        {
+                            id: 5,
+                            children: []
+                        }
+                    ]
+                },
+                {
+                    id: 2,
+                    children: []
+                },
+                {
+                    id: 3,
+                    children: []
+                }
+            ]
+        }
 
-var app = new Vue({
-    el: '#app',
-
-    // リアクティブデータ
-    data: {
-        message: 'Tree Object',
-        // リアクティブデータのリストは「普遍かつユニーク」なIDなどをもたせることを推奨
-        objList: [{id: 1, name: 'スライム', hp: 100}, {id: 2, name: 'ゴブリン', hp: 200}, {id: 3, name: 'ドラゴン', hp: 500}],
-        inputMessage: '初期メッセージ',
-        inputNumber: 0,
-        isShow: false,
-        state: state,    // オプション外で定義されたデータをリアクティブデータに変換
-        // なるべくあとから代入されるデータと同じ型で定義しておく
-        todos: [],
-        error: null,
-        classObject: { child: true, 'is-active': false},
-        styleObject: { color: 'red', backgroundColor: 'lightgray'},
-        // 複数の属性のデータバインディング
-        item: { id: 1, src: 'item1.jpg', alt: '商品1サムネイル', width: 200, height: 200 },
-        ok: true,
-        type: 'B'
+// define component
+Vue.component('tree', {
+    template: '#tree-template',
+    props: {
+        model: Object
     },
-    methods: {
-        handleClick: function(event) {
-            alert(event.target);
-        },
-        increment: function() {
-            // thisは関数を呼び出すオブジェクトへのリンク（ここではnew Vue()の返り値と同じものを指している）
-            this.state.count += 1
+    data: function() {
+        return {
+            open: false
         }
     }
 })
 
-console.log(app.message)
-//app.objList.push('9999')  // エラーにはならない
+// boot up the demo
+var app = new Vue({
+    el: '#app',
+    data: {
+        treeNode: treeNode
+    }
+})
 
-// dataオプション直下のプロパティはあとから追加できない
-//app.inputMessage = '初期メッセージ'
-//app.inputNumber = 0
+function ClickEvent() {
+    var target = event.target
+    var parent = event.target.parentNode
+    if (target.nodeName == "IMG" && parent.nodeName == "LI") {
+        // サブツリーの展開
+        var clist = parent.classList
+        if (clist.contains("collapse")) {
+            clist.toggle("expand")
+        }
+
+        // マーカーのトグル
+        var array = target.src.split("/")
+        var fileName = array[array.length - 1]
+        fileName == "close.png" ? target.src = "./images/open.png" : target.src = "./images/close.png"
+    }
+}
