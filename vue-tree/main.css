@@ -33,3 +33,8 @@ img.marker {
 .root-node span {
     cursor: pointer;
 }
+
+.root-node span.selected {
+    background-color: chartreuse;
+    padding: 3px;
+}

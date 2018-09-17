@@ -11,7 +11,7 @@
 <script type="text/x-template" id="tree-template">
     <li class="collapse expand">
         <img src="./images/open.png" @click="openAndClose" class="marker">
-        <span @click="selectNode($event, node)">{{ node.id }}</span>
+        <span @click="selectNode($event, node)" :class="{ 'selected': false }">{{ node.id }}</span>
         <ul>
             <tree v-for="(node, index) in node.children"
             :key="index" :node="node"></tree>
