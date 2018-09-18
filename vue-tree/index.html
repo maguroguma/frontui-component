@@ -11,7 +11,7 @@
 <script type="text/x-template" id="tree-template">
     <li class="collapse expand">
         <img src="./images/open.png" @click="openAndClose" class="marker">
-        <span @click="selectNode($event, node)" :class="{ 'selected': false }">{{ node.id }}</span>
+        <span @click="selectNode($event, node)" :class="{ 'selected': node.isSelected }">{{ node.id }}</span>
         <ul>
             <tree v-for="(node, index) in node.children"
             :key="index" :node="node"></tree>
@@ -22,8 +22,7 @@
 <div id="app">
     <button @click="addNewNode">選択中のノードに子ノードを追加</button>
     <button @click="deleteNode">選択中のノードを削除</button>
-    <div>直前の選択ノード: {{ preSelectedNode | nodeStringer }}</div>
-    <div>現在の選択ノード: {{ selectedNode | nodeStringer }}</div>
+    <div>直前の選択ノード: {{ selectedNode | nodeStringer }}</div>
 
     <!-- the demo root element -->
     <ul class="root-node">

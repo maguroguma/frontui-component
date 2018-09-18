@@ -1,26 +1,32 @@
 // initial tree object
 var treeNode = {
             id: 0,
+            isSelected: false,
             children: [
                 {
                     id: 1,
+                    isSelected: false,
                     children: [
                         {
                             id: 4,
+                            isSelected: false,
                             children: []
                         },
                         {
                             id: 5,
+                            isSelected: false,
                             children: []
                         }
                     ]
                 },
                 {
                     id: 2,
+                    isSelected: false,
                     children: []
                 },
                 {
                     id: 3,
+                    isSelected: false,
                     children: []
                 }
             ]
@@ -73,7 +79,6 @@ var app = new Vue({
     el: '#app',
     data: {
         treeNode: treeNode,
-        preSelectedNode: null,
         selectedNode: null
     },
     methods: {
@@ -93,7 +98,10 @@ var app = new Vue({
             console.log('RECEIVED')
             console.log('CLICKED NODE: ' + selectedNode.id)
             this.count++
-            app.preSelectedNode = app.selectedNode
+            if (app.selectedNode) {
+                app.selectedNode.isSelected = false
+            }
+            selectedNode.isSelected = true
             app.selectedNode = selectedNode
         })
     },
