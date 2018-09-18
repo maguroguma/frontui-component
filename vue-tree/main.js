@@ -2,6 +2,7 @@
 var treeNode = {
             id: 0,
             isSelected: false,
+            maxId: 5,
             children: [
                 {
                     id: 1,
@@ -79,15 +80,18 @@ var app = new Vue({
     el: '#app',
     data: {
         treeNode: treeNode,
-        selectedNode: null
+        selectedNode: null,
+        maxId: treeNode.maxId
     },
     methods: {
-        updateState(event) {
-            console.log('RECEIVED')
-            console.log(event)
-        },
         addNewNode: function(event) {
-            console.log(event)
+            if (this.selectedNode === null) {
+                alert('SELECT SOME NODE!')
+                return
+            }
+            this.maxId++
+            console.log(this.maxId)
+            this.selectedNode.children.push({ id: this.maxId, isSelected: false, children: [] })
         },
         deleteNode: function(event) {
             console.log(event)
