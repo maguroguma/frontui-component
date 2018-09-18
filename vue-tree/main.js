@@ -69,8 +69,6 @@ Vue.component('tree', {
         },
         selectNode: function(event, selectedNode) {
             bus.$emit('node-select-event', selectedNode)
-            console.log('EMITTED')
-            console.log('CLICKED NODE: ' + selectedNode.id)
         }
     }
 })
@@ -90,17 +88,14 @@ var app = new Vue({
                 return
             }
             this.maxId++
-            console.log(this.maxId)
             this.selectedNode.children.push({ id: this.maxId, isSelected: false, children: [] })
         },
         deleteNode: function(event) {
-            console.log(event)
+            if (confirm('CHILD NODES WILL BE DELETED, IS IT OK?')) this.selectedNode.children = []
         }
     },
     created: function() {
         bus.$on('node-select-event', function(selectedNode) {
-            console.log('RECEIVED')
-            console.log('CLICKED NODE: ' + selectedNode.id)
             this.count++
             if (app.selectedNode) {
                 app.selectedNode.isSelected = false
