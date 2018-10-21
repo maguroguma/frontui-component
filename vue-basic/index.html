@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js App</title>
+    <link href="main.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <p>{{ message }}</p>
+
+        <div>v-for DEMO</div>
+        名前<input v-model="name">
+        <button v-on:click="doAdd">モンスターを追加</button>
+        <ol>
+            <li v-for="(item, index) in objList" :key="item.id" :class="{ tuyoi: item.hp > 300 }">
+                ID.{{ item.id }} {{ item.name }} HP.{{ item.hp }}
+                <span v-if="item.hp > 300">つよい！</span>
+                <button @:click="doRemove(index)">モンスターを削除</button>
+                <button @:click="doAttack(index)">攻撃する</button>
+            </li>
+        </ol>
+
+        <div>button DEMO</div>
+        <div><button @:click="handleClick">TEST BUTTON</button></div>
+        <div>{{ state.count }} times clicked!</div>
+        <button @:click="increment">COUNT UP</button>
+
+        <div>{{ inputMessage }}</div>
+        <input v-model="inputMessage">
+        <div>{{ inputNumber }}</div>
+        <input v-model.number="inputNumber">
+
+        <div>v-if, v-show DEMO</div>
+        <div v-if="isShow">hidden?</div>
+        <div v-show="isShow">hidden?</div>
+        <template v-if="ok">
+            <header>タイトル</header>
+            <div>コンテンツ</div>
+        </template>
+        <div v-if="type==='A'">typeはA</div>
+        <div v-else-if="type==='B'">typeはB</div>
+        <div v-else>すべての条件を満たさなかった</div>
+
+        <div>v-bind DEMO</div>
+        <input type="text" v-bind:value="message">
+        <input type="text" :value="message">
+
+        <div>class/style binding DEMO</div>
+        <!--
+        <div :class="{ child: isChild, 'is-active': isActive }">Text</div>
+        <div :style="{ color: textColor, backgroundColor: bgColor }">Text</div>
+        -->
+        <div :class="classObject">Text</div>
+        <div :style="styleObject">Text</div>
+
+        <div>multi attribute binding DEMO</div>
+        <img v-bind="item">
+
+        <div>$ref DEMO</div>
+        <div ref="hello">Hello</div>
+
+        <div>v-cloak DEMO</div>
+        <div v-cloak>{{ objList }}</div>
+
+        <div>vue component DEMO</div>
+        <ul>
+            <comp-child v-for="item in objList" :key="item.id" :name="item.name" :hp="item.hp"></comp-child>
+        </ul>
+
+        <!-- DEBUG -->
+        <hr>
+        <div>$data DEMO</div>
+        <div>{{ $data }}</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
