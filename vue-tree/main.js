@@ -46,7 +46,7 @@ Vue.component('tree', {
     props: {
         node: Object
     },
-    data: function() {
+    data: function() {  // ほかのコンポーネントインスタンスと共有されないために、dataオプションは関数で定義
         return {
         }
     },
