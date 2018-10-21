@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Vue.js SPAのサンプルアプリケーション</title>
+    </head>
+    <body>
+        <div id="app">
+            <router-link to="/top">トップページ</router-link>
+            <router-link to="/users">ユーザ一覧ページ</router-link>
+            <router-link :to="{ name: 'user', params: { userId: 123 } }">ユーザ詳細ページ</router-link>
+            <router-view></router-view>
+            <a href="https://jsfiddle.net/tejitak/qkrzyh08/">書籍のサンプル</a>
+        </div>
+        <!-- Vue.js本体とVue Routerの読み込み-->
+        <script src="https://unpkg.com/vue@2.5.17"></script>
+        <script src="https://unpkg.com/vue-router@3.0.1"></script>
+        <script>
+            // ルートオプションを渡してルーターインスタンスを生成
+            var router = new VueRouter({
+                routes: [
+                    {
+                        path: '/top',
+                        component: {
+                            template: '<div>トップページです。</div>'
+                        }
+                    },
+                    {
+                        path: '/users',
+                        component: {
+                            template: '<div>ユーザ一覧ページです。</div>'
+                        }
+                    },
+                    {
+                        // コロンで始まるパターンマッチング
+                        path: '/user/:userId',
+                        name: 'user',
+                        component: {
+                            template: '<div>ユーザIDは {{ $route.params.userId }} です。</div>'
+                        }
+                    }
+                ]
+            })
+            // ルーターのインスタンスをrootとなるVueインスタンスに渡します
+            var app = new Vue({
+                router: router
+            }).$mount('#app')
+        </script>
+    </body>
+</html>
